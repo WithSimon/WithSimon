@@ -1,0 +1,47 @@
+[
+  {
+    "id": "project-1",
+    "title": "Sample Product Management Project",
+    "slug": "sample-pm-project",
+    "description": "A comprehensive product management case study showcasing strategy, execution, and results.",
+    "thumbnail": "assets/img/projects/project-1/thumbnail.jpg",
+    "category": "Product Management",
+    "date": "2024-12-15",
+    "featured": true,
+    "overview": {
+      "challenge": "Brief description of the problem or opportunity",
+      "solution": "High-level overview of the solution approach",
+      "impact": "Key results and metrics achieved"
+    },
+    "tags": ["Product Strategy", "User Research", "Data Analysis"],
+    "blogPosts": [
+      {
+        "id": "post-1",
+        "title": "Discovery Phase: Understanding User Needs",
+        "slug": "discovery-phase",
+        "date": "2024-11-01",
+        "excerpt": "How we conducted user research to identify the core problems and opportunities.",
+        "readTime": "5 min read",
+        "content": "data/projects/project-1/posts/post-1.md"
+      },
+      {
+        "id": "post-2",
+        "title": "Defining Product Strategy",
+        "slug": "product-strategy",
+        "date": "2024-11-15",
+        "excerpt": "Breaking down the strategic approach and roadmap decisions.",
+        "readTime": "7 min read",
+        "content": "data/projects/project-1/posts/post-2.md"
+      },
+      {
+        "id": "post-3",
+        "title": "Launch and Results",
+        "slug": "launch-results",
+        "date": "2024-12-15",
+        "excerpt": "Measuring success and lessons learned from the launch.",
+        "readTime": "6 min read",
+        "content": "data/projects/project-1/posts/post-3.md"
+      }
+    ]
+  }
+]
