@@ -19,11 +19,13 @@
     <nav class="navbar navbar-expand-md bg-warning py-3" data-bs-theme="light" style="background: linear-gradient(-75deg, var(--bs-secondary) 0%, var(--bs-warning) 100%);">
         <div class="container"><a class="navbar-brand d-flex align-items-center" href="index.html"><span class="d-flex justify-content-center align-items-center me-2 bs-icon" style="width: 35px;height: 35px;"><img src="assets/img/patinho.svg" style="filter: brightness(100%);" width="45" height="32"></span><span class="fs-4" style="font-family: Poppins, sans-serif;"><strong>WithSimon</strong></span></a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-5"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navcol-5">
+                <div class="mobile-menu-close d-md-none" onclick="document.getElementById('navcol-5').classList.remove('show')"></div>
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
                     <li class="nav-item"><a class="nav-link active" href="about-me.html">About me</a></li>
                     <li class="nav-item"><a class="nav-link" href="my-work.html">My Work</a></li>
-                </ul><a class="btn btn-primary link-body-emphasis ms-md-2" role="button" href="hire-me.html"><strong>Hire Me!</strong></a>
+                    <li class="nav-item"><a class="btn btn-special link-body-dark ms-md-2" role="button" href="hire-me.html"><strong>Hire Me!</strong></a></li>
+                </ul>
             </div>
         </div>
     </nav>
