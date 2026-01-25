@@ -123,13 +123,22 @@ class ProductSystem {
         // In a real implementation, you'd need a manifest file or server-side directory listing
         // For now, we'll use a simple products list file
         try {
+            console.log('Fetching products-list.json...');
             const response = await fetch('data/products-list.json');
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+
             const productFiles = await response.json();
+            console.log('Product files:', productFiles);
 
             const products = await Promise.all(
                 productFiles.map(async (filename) => {
+                    console.log('Loading:', filename);
                     const markdown = await this.loadProductFile(filename);
                     const { metadata, content } = this.parseMarkdown(markdown);
+                    console.log('Loaded product:', metadata.title);
                     return {
                         filename,
                         ...metadata,
@@ -139,6 +148,7 @@ class ProductSystem {
             );
 
             this.products = products.sort((a, b) => new Date(b.date) - new Date(a.date));
+            console.log('Total products loaded:', this.products.length);
             return this.products;
         } catch (error) {
             console.error('Error loading products:', error);
@@ -269,16 +279,23 @@ const productSystem = new ProductSystem();
 
 // Auto-load on page ready
 document.addEventListener('DOMContentLoaded', async () => {
+    console.log('DOM loaded, initializing...');
+
     await productSystem.loadProducts();
 
     const path = window.location.pathname;
     const params = new URLSearchParams(window.location.search);
 
-    if (path.includes('my-work.html')) {
+    console.log('Current path:', path);
+    console.log('Products loaded:', productSystem.products.length);
+
+    if (path.includes('my-work')) {
+        console.log('Rendering products cards...');
         productSystem.renderProductCards('products-container');
-    } else if (path.includes('product.html')) {
+    } else if (path.includes('product')) {
         const slug = params.get('slug');
         if (slug) {
+            console.log('Rendering product detail for:', slug);
             await productSystem.renderProduct(slug, 'product-detail');
         }
     }
