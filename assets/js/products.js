@@ -272,6 +272,57 @@ class ProductSystem {
             </article>
         `;
     }
+
+    // Render featured products on home page (limit to 3 most recent)
+    renderFeaturedProducts(containerId) {
+        const container = document.getElementById(containerId);
+        if (!container) return;
+
+        container.innerHTML = '';
+
+        const featuredProducts = this.products.slice(0, 3); // Get first 3 products
+
+        if (featuredProducts.length === 0) {
+            container.innerHTML = `
+                <div class="col-12 text-center py-5">
+                    <p class="text-muted">No products available yet.</p>
+                </div>
+            `;
+            return;
+        }
+
+        featuredProducts.forEach(product => {
+            const col = document.createElement('div');
+            col.className = 'col';
+
+            const tags = Array.isArray(product.tags) ? product.tags : [];
+
+            col.innerHTML = `
+                <div class="card h-100 shadow-sm">
+                    <img class="card-img-top"
+                         style="height: 200px; object-fit: cover;"
+                         src="${product.thumbnail || 'https://via.placeholder.com/800x600?text=Product'}"
+                         alt="${product.title}">
+                    <div class="card-body">
+                        <span class="badge bg-primary mb-2">${product.category || 'Product'}</span>
+                        <h4 class="card-title">${product.title}</h4>
+                        <p class="card-text text-muted">${product.description}</p>
+                        <div class="mt-3">
+                            ${tags.slice(0, 3).map(tag => `<span class="badge bg-secondary me-1">${tag}</span>`).join('')}
+                        </div>
+                    </div>
+                    <div class="card-footer bg-transparent border-top-0">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <small class="text-muted">${this.formatDate(product.date)}</small>
+                            <a href="product.html?slug=${product.slug}" class="btn btn-primary btn-sm">View Case Study</a>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            container.appendChild(col);
+        });
+    }
 }
 
 // Initialize
@@ -298,5 +349,8 @@ document.addEventListener('DOMContentLoaded', async () => {
             console.log('Rendering product detail for:', slug);
             await productSystem.renderProduct(slug, 'product-detail');
         }
+    } else if (path === '/' || path.includes('index')) {
+        console.log('Rendering featured products on home page...');
+        productSystem.renderFeaturedProducts('featured-products-container');
     }
 });
