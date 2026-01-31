@@ -686,7 +686,6 @@
     left: 0;
     width: 100vw;
     height: 100vh;
-    background: rgba(29, 30, 34, 0.6);
     z-index: -1;
     animation: fadeIn 0.3s ease;
   }

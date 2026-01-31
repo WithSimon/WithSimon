@@ -4,10 +4,12 @@ slug: sample-pm-project
 description: A comprehensive product management case study showcasing strategy, execution, and results.
 thumbnail: assets/img/products/sample-product.jpg
 category: Product Management
-date: 2024-12-15
-tags: [Product Strategy, User Research, Data Analysis]
+date: 2024-12-15T00:00:00.000Z
+tags:
+  - Product Strategy
+  - User Research
+  - Data Analysis
 ---
-
 # Sample Product Management Project
 
 ## Overview

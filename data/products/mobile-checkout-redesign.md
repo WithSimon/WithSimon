@@ -4,15 +4,18 @@ slug: mobile-checkout-redesign
 description: Redesigned mobile checkout experience that increased conversion by 23% and reduced cart abandonment
 thumbnail: https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&h=600&fit=crop
 category: Product Management
-date: 2024-09-15
-tags: [Mobile UX, Conversion Optimization, User Research]
+date: 2024-09-15T00:00:00.000Z
+tags:
+  - Mobile UX
+  - Conversion Optimization
+  - User Research
 ---
-
 # Mobile Checkout Flow Redesign
 
-## Executive Summary
+## 
 
-Led the complete redesign of our mobile checkout experience for an e-commerce platform serving 2M+ monthly active users. The project resulted in a 23% increase in mobile conversion rate and a 31% reduction in cart abandonment.
+
+
 
 ## The Challenge
 
@@ -233,4 +236,4 @@ The 23% conversion increase translated to millions in additional revenue while s
 
 ---
 
-*Want to discuss product strategy or UX optimization? [Get in touch →](hire-me.html)*
+*Want to discuss product strategy or UX optimization? *[hire-me.html](./hire-me.html)
