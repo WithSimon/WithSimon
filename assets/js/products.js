@@ -1,4 +1,4 @@
-// Simple product case study system
+// Product Case Study System - Redesign Refactor
 
 class ProductSystem {
     constructor() {
@@ -58,10 +58,10 @@ class ProductSystem {
         html = html.replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2">$1</a>');
 
         // Blockquotes
-        html = html.replace(/^> (.*$)/gim, '<blockquote class="blockquote border-start border-4 border-primary ps-3 my-3">$1</blockquote>');
+        html = html.replace(/^> (.*$)/gim, '<blockquote>$1</blockquote>');
 
         // Horizontal rules
-        html = html.replace(/^---$/gim, '<hr class="my-4">');
+        html = html.replace(/^---$/gim, '<hr>');
 
         // Lists
         const lines = html.split('\n');
@@ -120,8 +120,6 @@ class ProductSystem {
 
     // Load all products from the products directory
     async loadProducts() {
-        // In a real implementation, you'd need a manifest file or server-side directory listing
-        // For now, we'll use a simple products list file
         try {
             console.log('Fetching products-list.json...');
             const response = await fetch('data/products-list.json');
@@ -172,9 +170,44 @@ class ProductSystem {
         const date = new Date(dateString);
         return date.toLocaleDateString('en-US', {
             year: 'numeric',
-            month: 'long',
-            day: 'numeric'
+            month: 'long'
         });
+    }
+
+    // Calendar icon SVG
+    getCalendarIcon() {
+        return `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>`;
+    }
+
+    // Arrow icon SVG
+    getArrowIcon() {
+        return `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>`;
+    }
+
+    // Render product card HTML
+    renderProductCard(product) {
+        const tags = Array.isArray(product.tags) ? product.tags : [];
+
+        return `
+            <a href="product.html?slug=${product.slug}" class="project-card">
+                <div class="project-image-wrapper">
+                    <img src="${product.thumbnail || 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop'}"
+                         alt="${product.title}"
+                         class="project-image">
+                    <div class="project-overlay"></div>
+                    <span class="project-category">${product.category || 'Product'}</span>
+                    <div class="project-arrow">
+                        ${this.getArrowIcon()}
+                    </div>
+                </div>
+                <h3 class="project-title">${product.title}</h3>
+                <p class="project-description">${product.description}</p>
+                <div class="project-date">
+                    ${this.getCalendarIcon()}
+                    ${this.formatDate(product.date)}
+                </div>
+            </a>
+        `;
     }
 
     // Render product cards on My Work page
@@ -186,46 +219,16 @@ class ProductSystem {
 
         if (this.products.length === 0) {
             container.innerHTML = `
-                <div class="col-12 text-center py-5">
-                    <div class="alert alert-warning" role="alert">
-                        <h5>Unable to load products</h5>
-                        <p class="mb-0">Please run a local web server to view products. Try: <code>python -m http.server 8000</code></p>
-                    </div>
+                <div class="alert alert-warning" style="grid-column: 1 / -1;">
+                    <p><strong>Unable to load products</strong></p>
+                    <p>Please run a local web server to view products. Try: <code>python -m http.server 8000</code></p>
                 </div>
             `;
             return;
         }
 
         this.products.forEach(product => {
-            const col = document.createElement('div');
-            col.className = 'col';
-
-            const tags = Array.isArray(product.tags) ? product.tags : [];
-
-            col.innerHTML = `
-                <div class="card h-100 shadow-sm">
-                    <img class="card-img-top"
-                         style="height: 200px; object-fit: cover;"
-                         src="${product.thumbnail || 'https://via.placeholder.com/800x600?text=Product'}"
-                         alt="${product.title}">
-                    <div class="card-body">
-                        <span class="badge bg-primary mb-2">${product.category || 'Product'}</span>
-                        <h4 class="card-title">${product.title}</h4>
-                        <p class="card-text text-muted">${product.description}</p>
-                        <div class="mt-3">
-                            ${tags.map(tag => `<span class="badge bg-secondary me-1">${tag}</span>`).join('')}
-                        </div>
-                    </div>
-                    <div class="card-footer bg-transparent border-top-0">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <small class="text-muted">${this.formatDate(product.date)}</small>
-                            <a href="product.html?slug=${product.slug}" class="btn btn-primary btn-sm">View Case Study</a>
-                        </div>
-                    </div>
-                </div>
-            `;
-
-            container.appendChild(col);
+            container.innerHTML += this.renderProductCard(product);
         });
     }
 
@@ -244,30 +247,37 @@ class ProductSystem {
         const htmlContent = this.markdownToHtml(product.content);
         const tags = Array.isArray(product.tags) ? product.tags : [];
 
+        // Update page title
+        document.title = `${product.title} | Simon Tadeu`;
+
         container.innerHTML = `
-            <nav aria-label="breadcrumb" class="mb-4">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="my-work.html">My Work</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">${product.title}</li>
-                </ol>
+            <nav class="breadcrumb">
+                <a href="my-work.html">My Work</a>
+                <span class="breadcrumb-separator">/</span>
+                <span class="breadcrumb-current">${product.title}</span>
             </nav>
 
             <article>
-                <header class="mb-5">
-                    <span class="badge bg-primary mb-2">${product.category || 'Product'}</span>
-                    <p class="text-muted mb-3">${this.formatDate(product.date)}</p>
-                    <div class="mb-3">
-                        ${tags.map(tag => `<span class="badge bg-secondary me-2">${tag}</span>`).join('')}
+                <header class="product-header">
+                    <div class="product-meta">
+                        <span class="product-category-badge">${product.category || 'Product'}</span>
+                        <span class="product-date">${this.formatDate(product.date)}</span>
                     </div>
-                    ${product.thumbnail ? `<img src="${product.thumbnail}" class="img-fluid rounded mb-4" alt="${product.title}">` : ''}
+                    <div class="product-tags">
+                        ${tags.map(tag => `<span class="product-tag">${tag}</span>`).join('')}
+                    </div>
+                    ${product.thumbnail ? `<img src="${product.thumbnail}" class="product-thumbnail" alt="${product.title}">` : ''}
                 </header>
 
                 <div class="product-content">
                     ${htmlContent}
                 </div>
 
-                <footer class="mt-5 pt-4 border-top">
-                    <a href="my-work.html" class="btn btn-outline-primary">← Back to My Work</a>
+                <footer class="product-footer">
+                    <a href="my-work.html" class="btn btn-outline">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+                        Back to My Work
+                    </a>
                 </footer>
             </article>
         `;
@@ -280,47 +290,19 @@ class ProductSystem {
 
         container.innerHTML = '';
 
-        const featuredProducts = this.products.slice(0, 3); // Get first 3 products
+        const featuredProducts = this.products.slice(0, 3);
 
         if (featuredProducts.length === 0) {
             container.innerHTML = `
-                <div class="col-12 text-center py-5">
-                    <p class="text-muted">No products available yet.</p>
-                </div>
+                <p style="text-align: center; color: var(--muted-foreground); grid-column: 1 / -1;">
+                    No products available yet.
+                </p>
             `;
             return;
         }
 
         featuredProducts.forEach(product => {
-            const col = document.createElement('div');
-            col.className = 'col';
-
-            const tags = Array.isArray(product.tags) ? product.tags : [];
-
-            col.innerHTML = `
-                <div class="card h-100 shadow-sm">
-                    <img class="card-img-top"
-                         style="height: 200px; object-fit: cover;"
-                         src="${product.thumbnail || 'https://via.placeholder.com/800x600?text=Product'}"
-                         alt="${product.title}">
-                    <div class="card-body">
-                        <span class="badge bg-primary mb-2">${product.category || 'Product'}</span>
-                        <h4 class="card-title">${product.title}</h4>
-                        <p class="card-text text-muted">${product.description}</p>
-                        <div class="mt-3">
-                            ${tags.slice(0, 3).map(tag => `<span class="badge bg-secondary me-1">${tag}</span>`).join('')}
-                        </div>
-                    </div>
-                    <div class="card-footer bg-transparent border-top-0">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <small class="text-muted">${this.formatDate(product.date)}</small>
-                            <a href="product.html?slug=${product.slug}" class="btn btn-primary btn-sm">View Case Study</a>
-                        </div>
-                    </div>
-                </div>
-            `;
-
-            container.appendChild(col);
+            container.innerHTML += this.renderProductCard(product);
         });
     }
 }
@@ -349,7 +331,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             console.log('Rendering product detail for:', slug);
             await productSystem.renderProduct(slug, 'product-detail');
         }
-    } else if (path === '/' || path.includes('index')) {
+    } else if (path === '/' || path.includes('index') || path.endsWith('/')) {
         console.log('Rendering featured products on home page...');
         productSystem.renderFeaturedProducts('featured-products-container');
     }

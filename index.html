@@ -1,181 +1,249 @@
 <!DOCTYPE html>
-<html data-bs-theme="light" lang="en" style="--bs-primary: #FF6B35;--bs-primary-rgb: 255,107,53;--bs-secondary: #FFD166;--bs-secondary-rgb: 255,209,102;--bs-success: #06D6A0;--bs-success-rgb: 6,214,160;--bs-info: #118AB2;--bs-info-rgb: 17,138,178;--bs-warning: #EF476F;--bs-warning-rgb: 239,71,111;--bs-danger: #D62828;--bs-danger-rgb: 214,40,40;--bs-light: #FFF8F0;--bs-light-rgb: 255,248,240;--bs-dark: #1D1E22;--bs-dark-rgb: 29,30,34;--bs-body-color: #2C2C2C;--bs-body-bg: #FFF3E0;">
-
+<html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>WithSimon</title>
-    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter&amp;display=swap">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins&amp;display=swap">
-    <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
-    <link rel="stylesheet" href="assets/css/bs-theme-overrides.css">
-    <link rel="stylesheet" href="assets/css/aos.min.css">
-    <link rel="stylesheet" href="assets/css/Hero-Clean-Reverse-images.css">
-    <link rel="stylesheet" href="assets/css/Navbar-Right-Links-Dark-icons.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simon Tadeu | Senior Product Manager</title>
+    <meta name="description" content="Simon Tadeu - Senior Product Manager with 8+ years of experience driving product innovation at scale.">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Fira+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="assets/css/styles.css">
 </head>
-
 <body>
-    <nav class="navbar navbar-expand-md fixed-top bg-warning py-3" data-bs-theme="light" style="background: linear-gradient(-75deg, var(--bs-secondary) 0%, var(--bs-warning) 100%);">
-        <div class="container"><a class="navbar-brand d-flex align-items-center" href="index.html"><span class="d-flex justify-content-center align-items-center me-2 bs-icon" style="width: 35px;height: 35px;"><img src="assets/img/patinho.svg" style="filter: brightness(100%);" width="45" height="32"></span><span class="fs-4" style="font-family: Poppins, sans-serif;"><strong>WithSimon</strong></span></a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-5"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
-            <div class="collapse navbar-collapse" id="navcol-5">
-                <div class="mobile-menu-close d-md-none" onclick="document.getElementById('navcol-5').classList.remove('show')"></div>
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="about-me.html">About me</a></li>
-                    <li class="nav-item"><a class="nav-link" href="my-work.html">My Work</a></li>
-                    <li class="nav-item"><a class="btn btn-special link-body-dark ms-md-2" role="button" href="hire-me.html"><strong>Hire Me!</strong></a></li>
-                </ul>
-            </div>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-inner">
+            <a href="index.html" class="logo">
+                <span class="logo-icon">ST</span>
+            </a>
+
+            <nav class="nav">
+                <a href="index.html" class="nav-link active">Home</a>
+                <a href="my-work.html" class="nav-link">Projects</a>
+                <a href="hire-me.html" class="btn btn-outline btn-sm">Get In Touch</a>
+            </nav>
+
+            <button class="mobile-menu-btn" onclick="toggleMobileMenu()">Menu</button>
         </div>
-    </nav>
-    <main style="padding-top: 77px;">
-        <section class="hero-section">
-            <div class="container">
-                <div class="row align-items-center">
-                    <div class="col-md-6 text-center text-md-start">
-                        <div class="hero-content">
-                            <h2 class="fw-bold mb-3" style="font-family: 'Poppins';">Hi! I'm Simon Tadeu👋</h2>
-                            <h4 class="fw-bold mb-4" style="font-family: 'Poppins';"><span style="font-weight: normal !important;">Senior Product Manager</span></h4>
-                            <p class="mb-4">WithSimon is my personal website to showcase my journey as a product creator, team leader and user advocate.</p>
-                            <p class="mb-4">Looking for a product manager with an arsenal of successful products from many markets under his belt, or just want to chat? Reach out!</p>
+    </header>
 
-                            <!-- Employment Status Badge -->
-                            <a href="https://www.iterable.com" target="_blank">
-                            <div class="employment-status-badge">
-                                <span class="status-dot employed"></span>
-                                <span>Currently at Iterable</span>
-                            </div>
+    <!-- Mobile Menu -->
+    <div class="mobile-menu-overlay" id="mobileMenuOverlay" onclick="toggleMobileMenu()"></div>
+    <div class="mobile-menu" id="mobileMenu">
+        <button class="mobile-menu-close" onclick="toggleMobileMenu()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+        </button>
+        <nav class="mobile-nav">
+            <a href="index.html" class="mobile-nav-link active">Home</a>
+            <a href="my-work.html" class="mobile-nav-link">Projects</a>
+            <a href="hire-me.html" class="btn btn-special">Get In Touch</a>
+        </nav>
+    </div>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-inner">
+                <div class="hero-grid">
+                    <!-- Content -->
+                    <div class="hero-content animate-fade-up">
+                        <!-- Tags -->
+                        <div class="hero-tags">
+                            <span class="hero-tag">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/><path d="M5 3v4"/><path d="M19 17v4"/><path d="M3 5h4"/><path d="M17 19h4"/></svg>
+                                Building Products
+                            </span>
+                            <span class="hero-tag">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 8-9.04 9.06a2.82 2.82 0 1 0 3.98 3.98L16 12"/><circle cx="17" cy="7" r="5"/></svg>
+                                Speaker
+                            </span>
+                            <span class="hero-tag">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/></svg>
+                                Mentor
+                            </span>
+                            <span class="hero-tag">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+                                Tech
+                            </span>
+                        </div>
+
+                        <h1 class="hero-title">Simon</h1>
+                        <h1 class="hero-title">Tadeu</h1>
+
+                        <h2 class="hero-subtitle">Senior Product Manager</h2>
+
+                        <p class="hero-description">
+                            Seasoned product leader with 8+ years of experience, driving product
+                            innovation at scale. Expert in building high-performing teams,
+                            delivering impactful products, and advocating for users.
+                        </p>
+
+                        <div class="hero-buttons">
+                            <a href="hire-me.html" class="btn btn-primary btn-lg">
+                                Get In Touch
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
                             </a>
+                            <a href="my-work.html" class="btn btn-outline btn-lg">View Projects</a>
+                        </div>
 
-                            <!--
-                              TO CHANGE STATUS: Replace the div above with one of these options:
-
-                              OPTION 1 - Open to Work (Green):
-                              <div class="employment-status-badge">
-                                <span class="status-dot seeking"></span>
-                                <span>Open to Work</span>
-                              </div>
-
-                              OPTION 2 - Currently Employed (Yellow):
-                              <div class="employment-status-badge">
-                                <span class="status-dot employed"></span>
-                                <span>Currently at [Company Name]</span>
-                              </div>
-
-                              Alternative texts for employed state:
-                              - "Working at [Company Name]"
-                              - "Employed • Open to Conversations"
-                            -->
+                        <div class="hero-status">
+                            <span class="status-dot"></span>
+                            <span>Currently at</span>
+                            <a href="https://www.iterable.com/" target="_blank" rel="noopener noreferrer">Iterable</a>
                         </div>
                     </div>
-                    <div class="col-md-6">
+
+                    <!-- Image -->
+                    <div class="hero-image-container animate-fade-up delay-200">
                         <div class="hero-image-wrapper">
-                            <img class="hero-image" src="assets/img/Main%20original%20(Medium).jpg" alt="Simon Tadeu">
+                            <div class="hero-image-shadow-1"></div>
+                            <div class="hero-image-shadow-2"></div>
+                            <img src="assets/img/Main original (Medium).jpg" alt="Simon Tadeu" class="hero-image">
+                            <div class="hero-location">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                                San Francisco, CA
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
-        <div class="container py-4 py-xl-5">
-            <div class="row gy-4 row-cols-2 row-cols-md-4" data-aos="fade-up">
-                <div class="col">
-                    <div class="text-center d-flex flex-column justify-content-center align-items-center py-3">
-                        <div class="bs-icon-xl bs-icon-circle bs-icon-primary d-flex flex-shrink-0 justify-content-center align-items-center d-inline-block mb-2 bs-icon lg"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-rocket-takeoff-fill">
-                                <path d="M12.17 9.53c2.307-2.592 3.278-4.684 3.641-6.218.21-.887.214-1.58.16-2.065a3.578 3.578 0 0 0-.108-.563 2.22 2.22 0 0 0-.078-.23V.453c-.073-.164-.168-.234-.352-.295a2.35 2.35 0 0 0-.16-.045 3.797 3.797 0 0 0-.57-.093c-.49-.044-1.19-.03-2.08.188-1.536.374-3.618 1.343-6.161 3.604l-2.4.238h-.006a2.552 2.552 0 0 0-1.524.734L.15 7.17a.512.512 0 0 0 .433.868l1.896-.271c.28-.04.592.013.955.132.232.076.437.16.655.248l.203.083c.196.816.66 1.58 1.275 2.195.613.614 1.376 1.08 2.191 1.277l.082.202c.089.218.173.424.249.657.118.363.172.676.132.956l-.271 1.9a.512.512 0 0 0 .867.433l2.382-2.386c.41-.41.668-.949.732-1.526l.24-2.408Zm.11-3.699c-.797.8-1.93.961-2.528.362-.598-.6-.436-1.733.361-2.532.798-.799 1.93-.96 2.528-.361.599.599.437 1.732-.36 2.531Z"></path>
-                                <path d="M5.205 10.787a7.632 7.632 0 0 0 1.804 1.352c-1.118 1.007-4.929 2.028-5.054 1.903-.126-.127.737-4.189 1.839-5.18.346.69.837 1.35 1.411 1.925Z"></path>
-                            </svg></div>
-                        <div class="px-3">
-                            <h2 class="fw-bold mb-0">20+</h2>
-                            <p class="mb-0">Products built</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="text-center d-flex flex-column justify-content-center align-items-center py-3">
-                        <div class="bs-icon-xl bs-icon-circle bs-icon-primary d-flex flex-shrink-0 justify-content-center align-items-center d-inline-block mb-2 bs-icon lg"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icon-tabler-timeline">
-                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                <path d="M4 16l6 -7l5 5l5 -6"></path>
-                                <path d="M15 14m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0"></path>
-                                <path d="M10 9m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0"></path>
-                                <path d="M4 16m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0"></path>
-                                <path d="M20 8m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0"></path>
-                            </svg></div>
-                        <div class="px-3">
-                            <h2 class="fw-bold mb-0">8+</h2>
-                            <p class="mb-0">Years of experience</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="text-center d-flex flex-column justify-content-center align-items-center py-3">
-                        <div class="bs-icon-xl bs-icon-circle bs-icon-primary d-flex flex-shrink-0 justify-content-center align-items-center d-inline-block mb-2 bs-icon lg"><i class="fa fa-users"></i></div>
-                        <div class="px-3">
-                            <h2 class="fw-bold mb-0">1M+</h2>
-                            <p class="mb-0">Users served</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="text-center d-flex flex-column justify-content-center align-items-center py-3">
-                        <div class="bs-icon-xl bs-icon-circle bs-icon-primary d-flex flex-shrink-0 justify-content-center align-items-center d-inline-block mb-2 bs-icon lg"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-cart2">
-                                <path d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5M3.14 5l1.25 5h8.22l1.25-5H3.14zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2m-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0m9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2m-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0"></path>
-                            </svg></div>
-                        <div class="px-3">
-                            <h2 class="fw-bold mb-0">89</h2>
-                            <p class="mb-0">Erat netus</p>
-                        </div>
-                    </div>
-                </div>
+
+        <!-- Marquee -->
+        <div class="marquee">
+            <div class="marquee-track">
+                <span class="marquee-item">Product Strategy</span>
+                <span class="marquee-item star">&#9733;</span>
+                <span class="marquee-item">Team Leadership</span>
+                <span class="marquee-item star">&#9733;</span>
+                <span class="marquee-item">User Research</span>
+                <span class="marquee-item star">&#9733;</span>
+                <span class="marquee-item">Data-Driven</span>
+                <span class="marquee-item star">&#9733;</span>
+                <span class="marquee-item">Agile Expert</span>
+                <span class="marquee-item star">&#9733;</span>
+                <span class="marquee-item">Cross-Functional</span>
+                <span class="marquee-item star">&#9733;</span>
+                <span class="marquee-item">Product Strategy</span>
+                <span class="marquee-item star">&#9733;</span>
+                <span class="marquee-item">Team Leadership</span>
+                <span class="marquee-item star">&#9733;</span>
+                <span class="marquee-item">User Research</span>
+                <span class="marquee-item star">&#9733;</span>
+                <span class="marquee-item">Data-Driven</span>
+                <span class="marquee-item star">&#9733;</span>
+                <span class="marquee-item">Agile Expert</span>
+                <span class="marquee-item star">&#9733;</span>
+                <span class="marquee-item">Cross-Functional</span>
+                <span class="marquee-item star">&#9733;</span>
             </div>
         </div>
-        <div class="container py-4 py-xl-5">
-            <div class="row mb-5">
-                <div class="col-md-8 col-xl-6 text-center mx-auto">
-                    <h2>Products I've created</h2>
-                    <p class="w-lg-50">Curae hendrerit donec commodo hendrerit egestas tempus, turpis facilisis nostra nunc. Vestibulum dui eget ultrices.</p>
-                </div>
-            </div>
-            <div class="row gy-4 row-cols-1 row-cols-md-2 row-cols-xl-3" id="featured-products-container">
-                <!-- Featured products will be loaded here by JavaScript -->
-                <div class="col-12 text-center py-3">
-                    <div class="spinner-border text-primary" role="status">
-                        <span class="visually-hidden">Loading products...</span>
+
+        <!-- Stats Section -->
+        <section class="stats">
+            <div class="container">
+                <div class="stats-grid">
+                    <div class="stat-item animate-fade-up">
+                        <div class="stat-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg>
+                        </div>
+                        <div class="stat-value">20+</div>
+                        <div class="stat-label">Products Built</div>
+                    </div>
+                    <div class="stat-item animate-fade-up delay-100">
+                        <div class="stat-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+                        </div>
+                        <div class="stat-value">8+</div>
+                        <div class="stat-label">Years Experience</div>
+                    </div>
+                    <div class="stat-item animate-fade-up delay-200">
+                        <div class="stat-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                        </div>
+                        <div class="stat-value">1M+</div>
+                        <div class="stat-label">Users Served</div>
+                    </div>
+                    <div class="stat-item animate-fade-up delay-300">
+                        <div class="stat-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>
+                        </div>
+                        <div class="stat-value">15+</div>
+                        <div class="stat-label">Team Members Led</div>
                     </div>
                 </div>
             </div>
-            <div class="row mt-4">
-                <div class="col text-center">
-                    <a href="my-work.html" class="btn btn-primary btn-lg">View All Products →</a>
+        </section>
+
+        <!-- Featured Work -->
+        <section class="featured-work">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Projects</h2>
+                    <p class="section-description">
+                        A selection of impactful products and features I've brought to life,
+                        from concept to launch and beyond.
+                    </p>
                 </div>
+
+                <div class="projects-grid" id="featured-products-container">
+                    <!-- Products loaded by JavaScript -->
+                    <div class="loading">
+                        <div class="spinner"></div>
+                    </div>
+                </div>
+
+                <a href="my-work.html" class="view-all-link">
+                    View All Projects
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+                </a>
             </div>
-        </div>
+        </section>
     </main>
-    <footer class="text-center bg-dark d-flex flex-column justify-content-center align-items-center">
-        <div class="container" style="padding-top: 10px;">
-            <ul class="list-inline d-flex flex-column justify-content-center align-items-center">
-                <li class="list-inline-item me-4"></li>
-                <li class="list-inline-item me-4"></li>
-                <li class="list-inline-item"><a class="link-light" href="assets/files/CV.pdf" target="_blank">Simon's CV</a></li>
-            </ul>
-            <ul class="list-inline flex-row justify-content-center align-items-center">
-                <li class="list-inline-item me-4"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-facebook text-light">
-                        <path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951"></path>
-                    </svg></li>
-                <li class="list-inline-item me-4"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-twitter text-light">
-                        <path d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15"></path>
-                    </svg></li>
-                <li class="list-inline-item"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-instagram text-light">
-                        <path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.926 3.926 0 0 0-.923-1.417A3.911 3.911 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0h.003zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599.28.28.453.546.598.92.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.47 2.47 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.478 2.478 0 0 1-.92-.598 2.48 2.48 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233 0-2.136.008-2.388.046-3.231.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92.28-.28.546-.453.92-.598.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045v.002zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92zm-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217zm0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334"></path>
-                    </svg></li>
-            </ul>
-            <p class="text-white-50 mb-0">Simon Tadeu © 2025 WithSimon</p>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <span class="logo-icon">ST</span>
+                <span class="footer-brand-text">WithSimon</span>
+            </div>
+
+            <div class="footer-social">
+                <a href="https://www.linkedin.com/in/simontadeu/" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="LinkedIn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
+                </a>
+                <a href="https://twitter.com/simontadeu" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Twitter">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/></svg>
+                </a>
+                <a href="https://github.com/WithSimon" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="GitHub">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
+                </a>
+                <a href="mailto:hello@withsimon.com" class="social-link" aria-label="Email">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                </a>
+            </div>
+
+            <p class="footer-copyright">&copy; 2025 Simon Tadeu</p>
         </div>
     </footer>
-    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
-    <script src="assets/js/aos.min.js"></script>
-    <script src="assets/js/bs-init.js"></script>
-    <script src="assets/js/products.js"></script>
-</body>
 
+    <!-- Scripts -->
+    <script src="assets/js/products.js"></script>
+    <script>
+        // Mobile menu toggle
+        function toggleMobileMenu() {
+            document.getElementById('mobileMenu').classList.toggle('open');
+            document.getElementById('mobileMenuOverlay').classList.toggle('open');
+        }
+    </script>
+</body>
 </html>
