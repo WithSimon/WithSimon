@@ -2,7 +2,7 @@
 title: Bond Heart
 slug: bond-heart
 description: A wearable necklace that lets users feel someone else's heartbeat - led hardware and software from concept to launch
-thumbnail: https://images.unsplash.com/photo-1516962126636-27ad087061cc?w=800&h=600&fit=crop
+thumbnail: assets/img/products/bond-heart.jpeg
 category: Product Management
 date: 2023-03-01T00:00:00.000Z
 tags: [Hardware, Wearables, IoT, Product Strategy]
