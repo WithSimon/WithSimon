@@ -50,14 +50,12 @@
     </div>
 
     <main>
-        <section class="product-detail container">
-            <div id="product-detail">
-                <!-- Product content loaded by JavaScript -->
-                <div class="loading">
-                    <div class="spinner"></div>
-                </div>
+        <div id="product-detail">
+            <!-- Product content loaded by JavaScript -->
+            <div class="loading" style="padding-top: 10rem;">
+                <div class="spinner"></div>
             </div>
-        </section>
+        </div>
     </main>
 
     <!-- Footer -->
@@ -90,6 +88,9 @@
     <!-- Scripts -->
     <script src="assets/js/products.js"></script>
     <script>
+        // Scroll to top on page load
+        window.scrollTo(0, 0);
+
         // Mobile menu toggle
         function toggleMobileMenu() {
             document.getElementById('mobileMenu').classList.toggle('open');

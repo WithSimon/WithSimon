@@ -1098,6 +1098,308 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* ============================================
+   PROJECT DETAIL CARDS - Section-based layout
+   ============================================ */
+
+/* Yellow color for CSS */
+--yellow: hsl(45, 90%, 55%);
+
+#product-detail {
+  min-height: 100vh;
+}
+
+.project-detail-hero {
+  padding-top: 8rem;
+  padding-bottom: 2rem;
+}
+
+.project-detail-hero .back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--muted-foreground);
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  text-decoration: none;
+  margin-bottom: 2rem;
+  transition: color 0.2s ease;
+}
+
+.project-detail-hero .back-link:hover {
+  color: var(--pink);
+}
+
+.project-detail-hero .back-link svg {
+  width: 1rem;
+  height: 1rem;
+}
+
+.project-detail-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.project-detail-badge {
+  display: inline-block;
+  padding: 0.375rem 0.75rem;
+  background: transparent;
+  border: 1px solid var(--highlight);
+  color: var(--highlight);
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.project-detail-date {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  color: var(--muted-foreground);
+}
+
+.project-detail-date svg {
+  width: 1rem;
+  height: 1rem;
+}
+
+.project-detail-title {
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  margin-bottom: 1rem;
+}
+
+.project-detail-description {
+  font-size: 1.125rem;
+  color: var(--muted-foreground);
+  max-width: 48rem;
+  font-family: var(--font-mono);
+  margin-bottom: 1.5rem;
+}
+
+.project-detail-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+}
+
+.project-detail-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.375rem 0.75rem;
+  background: var(--secondary);
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-family: var(--font-mono);
+  color: var(--secondary-foreground);
+}
+
+.project-detail-tag svg {
+  width: 0.75rem;
+  height: 0.75rem;
+}
+
+/* Hero Image */
+.project-detail-image {
+  padding-bottom: 1.5rem;
+}
+
+.project-detail-image-wrapper {
+  position: relative;
+  overflow: hidden;
+  border-radius: 1rem;
+  border: 1px solid var(--border);
+}
+
+.project-detail-image-wrapper img {
+  width: 100%;
+  aspect-ratio: 16/9;
+  object-fit: cover;
+  display: block;
+}
+
+.project-detail-image-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, hsl(30, 15%, 8%, 0.6) 0%, transparent 100%);
+}
+
+/* Section Cards */
+.project-section-card {
+  background: var(--card);
+  border-radius: 1rem;
+  overflow: hidden;
+  margin-bottom: 2rem;
+}
+
+.project-section-card.full-width {
+  margin-bottom: 1.5rem;
+}
+
+/* Section card header backgrounds by color */
+.project-section-header {
+  padding: 1rem 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.project-section-header.color-highlight {
+  background: hsl(270, 70%, 65%, 0.2);
+  border-bottom: 1px solid hsl(270, 70%, 65%, 0.4);
+}
+
+.project-section-header.color-pink {
+  background: hsl(340, 85%, 65%, 0.2);
+  border-bottom: 1px solid hsl(340, 85%, 65%, 0.4);
+}
+
+.project-section-header.color-accent {
+  background: hsl(25, 90%, 58%, 0.2);
+  border-bottom: 1px solid hsl(25, 90%, 58%, 0.4);
+}
+
+.project-section-header.color-yellow {
+  background: hsl(45, 90%, 55%, 0.2);
+  border-bottom: 1px solid hsl(45, 90%, 55%, 0.4);
+}
+
+.project-section-icon {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 0.5rem;
+  background: hsl(30, 15%, 8%, 0.8);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--border);
+  font-size: 1.25rem;
+  flex-shrink: 0;
+}
+
+.project-section-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.project-section-card.full-width .project-section-title {
+  font-size: 1.5rem;
+}
+
+/* Section card content */
+.project-section-content {
+  padding: 1.5rem;
+}
+
+.project-section-card.full-width .project-section-content {
+  padding: 2rem;
+}
+
+.project-section-content p {
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  color: var(--muted-foreground);
+  line-height: 1.7;
+  margin-bottom: 1rem;
+}
+
+.project-section-content p:last-child {
+  margin-bottom: 0;
+}
+
+/* Subsection headers */
+.project-subsection-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 700;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.project-subsection-header .bullet-bar {
+  width: 0.25rem;
+  height: 1rem;
+  border-radius: 9999px;
+}
+
+.project-subsection-header .bullet-bar.color-highlight { background: var(--highlight); }
+.project-subsection-header .bullet-bar.color-pink { background: var(--pink); }
+.project-subsection-header .bullet-bar.color-accent { background: var(--accent); }
+.project-subsection-header .bullet-bar.color-yellow { background: hsl(45, 90%, 55%); }
+
+/* Styled bullet list */
+.project-bullet-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1rem 0;
+}
+
+.project-bullet-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  margin-bottom: 0.5rem;
+}
+
+.project-bullet-list li:last-child {
+  margin-bottom: 0;
+}
+
+.project-bullet-list .bullet {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  margin-top: 0.375rem;
+  flex-shrink: 0;
+}
+
+.project-bullet-list .bullet.color-highlight { background: var(--highlight); }
+.project-bullet-list .bullet.color-pink { background: var(--pink); }
+.project-bullet-list .bullet.color-accent { background: var(--accent); }
+.project-bullet-list .bullet.color-yellow { background: hsl(45, 90%, 55%); }
+
+.project-bullet-list span {
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  color: var(--muted-foreground);
+  line-height: 1.5;
+}
+
+/* Two-column grid for sections */
+.project-sections-grid {
+  display: grid;
+  gap: 2rem;
+  padding-bottom: 6rem;
+}
+
+@media (min-width: 768px) {
+  .project-sections-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.project-sections-grid .project-section-card {
+  margin-bottom: 0;
+}
+
+/* ============================================
    CONTACT / HIRE ME PAGE
    ============================================ */
 
