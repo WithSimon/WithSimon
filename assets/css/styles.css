@@ -24,7 +24,7 @@
   --secondary-foreground: hsl(40, 20%, 90%);
 
   --muted: hsl(30, 15%, 20%);
-  --muted-foreground: hsl(40, 10%, 60%);
+  --muted-foreground: hsl(40, 10%, 80%);
 
   /* Warm coral/orange accent */
   --accent: hsl(25, 90%, 58%);
@@ -303,7 +303,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .btn-lg {
-  padding: 1rem 2rem;
+  padding: 0.6rem 2rem;
   font-size: 1rem;
 }
 
@@ -1329,8 +1329,9 @@ h1, h2, h3, h4, h5, h6 {
   font-size: 0.875rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  margin-top: 1.5rem;
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.50em;
+  //margin-top: 1.5rem;//
+  //margin-bottom: 200em;//
 }
 
 .project-subsection-header .bullet-bar {
