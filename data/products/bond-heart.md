@@ -1,17 +1,17 @@
 ---
 title: Bond Heart
 slug: bond-heart
-description: A wearable necklace that lets users feel someone else's heartbeat - led hardware and software from concept to launch
+description: A wearable necklace that lets users feel someone else's heartbeat. Led hardware and software from concept to launch.
 thumbnail: assets/img/products/bond-heart.jpeg
-category: Product Management
+category: Wearables
 date: 2023-03-01T00:00:00.000Z
-tags: [Hardware, Wearables, IoT, Product Strategy]
----
+tags: [Hardware, Wearables, B2C, Head of Product, LDRs]
 
+---
 # Bond Heart
 
 ## Context
-Bond Heart is a wearable necklace from Bond Touch designed to let users feel someone else's heartbeat. As the Senior Product Manager, I led this project from concept to launch, overseeing both software and hardware.
+Bond Heart is a wearable necklace from Bond Touch designed to let users feel someone else's heartbeat. As the newly appointed Head of Product, I led this project from concept to launch, overseeing both software and hardware.
 
 The team included iOS and Android developers, QA specialists, a user researcher, three designers over time, and a hardware/firmware team based in China. It was a typical startup setup: lean, fast-moving, and occasionally chaotic, but ultimately rewarding.
 
