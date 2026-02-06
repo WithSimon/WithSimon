@@ -245,6 +245,40 @@
             document.getElementById('mobileMenu').classList.toggle('open');
             document.getElementById('mobileMenuOverlay').classList.toggle('open');
         }
+
+        // Scroll fade-in animation
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const statsSection = document.querySelector('.stats');
+            const featuredSection = document.querySelector('.featured-work');
+
+            if (statsSection) {
+                statsSection.style.opacity = '0';
+                statsSection.style.transform = 'translateY(30px)';
+                statsSection.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(statsSection);
+            }
+
+            if (featuredSection) {
+                featuredSection.style.opacity = '0';
+                featuredSection.style.transform = 'translateY(30px)';
+                featuredSection.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(featuredSection);
+            }
+        });
     </script>
 </body>
 </html>
