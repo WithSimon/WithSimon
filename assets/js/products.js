@@ -176,7 +176,7 @@ class ProductSystem {
 
     // Calendar icon SVG
     getCalendarIcon() {
-        return `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>`;
+        return `<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>`;
     }
 
     // Arrow icon SVG
@@ -203,8 +203,7 @@ class ProductSystem {
                 <h3 class="project-title">${product.title}</h3>
                 <p class="project-description">${product.description}</p>
                 <div class="project-date">
-                    ${this.getCalendarIcon()}
-                    ${this.formatDate(product.date)}
+                    ${this.getCalendarIcon()} ${this.formatDate(product.date)}
                 </div>
             </a>
         `;
@@ -239,7 +238,7 @@ class ProductSystem {
         let currentSection = null;
 
         // Section color mapping (cycles through colors)
-        const sectionColors = ['highlight', 'pink', 'accent', 'yellow'];
+        const sectionColors = ['info', 'main', 'secondary', 'accent'];
         const sectionIcons = {
             'context': '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>',
             'problem': '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>',
@@ -391,7 +390,7 @@ class ProductSystem {
         const arrowLeftIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>`;
 
         // Calendar icon SVG
-        const calendarIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>`;
+        const calendarIcon = this.getCalendarIcon();
 
         let html = `
             <!-- Back Navigation -->
@@ -406,8 +405,7 @@ class ProductSystem {
                     <div class="project-detail-meta">
                         <span class="project-detail-badge">${product.category || 'Product'}</span>
                         <span class="project-detail-date">
-                            ${calendarIcon}
-                            ${this.formatDate(product.date)}
+                            ${calendarIcon} ${this.formatDate(product.date)}
                         </span>
                     </div>
 
@@ -459,13 +457,13 @@ class ProductSystem {
         // Two-Column Grid for Remaining Sections
         if (otherSections.length > 0) {
             html += `
-            <section style="padding-top: 0; padding-bottom: 4rem;">
+            <section style="padding-top: 0; padding-bottom: 0;">
                 <div class="container">
                     <div class="project-sections-grid">
                         ${otherSections.map(section => {
-                            const borderColor = section.color === 'highlight' ? 'hsl(270, 70%, 65%, 0.4)' :
-                                               section.color === 'pink' ? 'hsl(340, 85%, 65%, 0.4)' :
-                                               section.color === 'accent' ? 'hsl(25, 90%, 58%, 0.4)' :
+                            const borderColor = section.color === 'info' ? 'hsl(270, 70%, 65%, 0.4)' :
+                                               section.color === 'main' ? 'hsl(340, 85%, 65%, 0.4)' :
+                                               section.color === 'secondary' ? 'hsl(25, 90%, 58%, 0.4)' :
                                                'hsl(45, 90%, 55%, 0.4)';
                             return `
                             <div class="project-section-card" style="border: 1px solid ${borderColor};">
@@ -490,7 +488,7 @@ class ProductSystem {
             <section class="section-padding" style="padding-bottom: 4rem;">
                 <div class="container">
                     <div class="product-footer">
-                        <a href="my-work.html" class="btn btn-outline">
+                        <a href="my-work.html" class="btn btn-secondary">
                             ${arrowLeftIcon}
                             Back to My Work
                         </a>
