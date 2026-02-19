@@ -418,16 +418,16 @@ h1, h2, h3, h4, h5, h6 {
   width: 0.5rem;
   height: 0.5rem;
   border-radius: 50%;
-  background: #06D6A0;
+  background: #3B82F6;
   animation: pulse 2s ease-in-out infinite;
 }
 
 @keyframes pulse {
   0%, 100% {
-    box-shadow: 0 0 0 0 rgba(6, 214, 160, 0.4);
+    box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.4);
   }
   50% {
-    box-shadow: 0 0 0 8px rgba(6, 214, 160, 0);
+    box-shadow: 0 0 0 8px rgba(59, 130, 246, 0);
   }
 }
 
@@ -536,12 +536,17 @@ h1, h2, h3, h4, h5, h6 {
   border-top: 1px solid var(--border);
   border-bottom: 1px solid var(--border);
   background: hsl(30, 20%, 18%, 0.3);
+  cursor: grab;
+  user-select: none;
+}
+
+.marquee.dragging {
+  cursor: grabbing;
 }
 
 .marquee-track {
   display: flex;
   width: max-content;
-  animation: marquee 20s linear infinite;
 }
 
 .marquee-content {
@@ -566,6 +571,10 @@ h1, h2, h3, h4, h5, h6 {
   text-transform: uppercase;
   letter-spacing: 0.1em;
   color: hsl(40, 20%, 95%, 0.8);
+}
+
+.marquee-item.star svg {
+  padding-bottom: 3px;
 }
 
 .marquee-item.star:nth-of-type(8n+2) {
@@ -778,13 +787,11 @@ h1, h2, h3, h4, h5, h6 {
   width: 100%;
   aspect-ratio: 4/3;
   object-fit: cover;
-  filter: grayscale(100%);
-  transition: filter 0.5s ease, transform 0.5s ease;
+  transition: transform 0.5s ease;
   display: block;
 }
 
 .project-card:hover .project-image {
-  filter: grayscale(0%);
   transform: scale(1.05);
 }
 
@@ -901,7 +908,7 @@ h1, h2, h3, h4, h5, h6 {
    ============================================ */
 
 .footer {
-  padding: 3rem 0;
+  padding: 1.5rem 0;
   border-top: 1px solid var(--border);
 }
 
@@ -913,27 +920,36 @@ h1, h2, h3, h4, h5, h6 {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1.5rem;
+  gap: 1rem;
 }
 
 @media (min-width: 768px) {
   .footer-inner {
     flex-direction: row;
     justify-content: space-between;
+    align-items: center;
   }
 }
 
-.footer-brand {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
+.footer-tagline {
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  color: var(--muted-foreground);
+  text-align: center;
 }
 
-.footer-brand-text {
-  font-weight: 700;
-  font-size: 1.125rem;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
+@media (min-width: 768px) {
+  .footer-tagline {
+    text-align: left;
+  }
+}
+
+.duck-icon {
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 0.25rem;
+  width: 18px;
+  height: 18px;
 }
 
 .footer-social {
@@ -955,6 +971,14 @@ h1, h2, h3, h4, h5, h6 {
   transition: all 0.2s ease;
 }
 
+.back-to-top {
+  opacity: 0.5;
+}
+
+.back-to-top:hover {
+  opacity: 1;
+}
+
 .social-link:hover {
   background: var(--secondary);
   color: var(--secondary-foreground);
@@ -964,14 +988,6 @@ h1, h2, h3, h4, h5, h6 {
 .social-link svg {
   width: 1rem;
   height: 1rem;
-}
-
-.footer-copyright {
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  color: var(--muted-foreground);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
 }
 
 /* ============================================
@@ -1002,6 +1018,69 @@ h1, h2, h3, h4, h5, h6 {
 
 .work-grid {
   padding-bottom: 6rem;
+}
+
+/* ============================================
+   ABOUT ME PAGE
+   ============================================ */
+
+.about-page {
+  padding-top: 0;
+  padding-bottom: 4rem;
+}
+
+.about-content {
+  max-width: 60rem;
+  margin: 0 auto;
+}
+
+.about-grid {
+  display: grid;
+  gap: 3rem;
+  align-items: start;
+}
+
+@media (min-width: 768px) {
+  .about-grid {
+    grid-template-columns: 1fr 1.5fr;
+    gap: 4rem;
+  }
+}
+
+.about-image-wrapper {
+  border-radius: 1rem;
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+
+.about-image {
+  width: 100%;
+  aspect-ratio: 3/4;
+  object-fit: cover;
+  display: block;
+}
+
+.about-heading {
+  font-size: 1.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  margin-bottom: 1.5rem;
+}
+
+.about-text {
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  color: var(--muted-foreground);
+  line-height: 1.8;
+  margin-bottom: 1.25rem;
+}
+
+.about-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 2rem;
 }
 
 /* ============================================

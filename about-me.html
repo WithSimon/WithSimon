@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Work | Simon Tadeu</title>
-    <meta name="description" content="A showcase of products and projects led by Simon Tadeu as a Senior Product Manager.">
+    <title>About Me | Simon Tadeu</title>
+    <meta name="description" content="Learn more about Simon Tadeu - Senior Product Manager with 8+ years of experience.">
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -25,9 +25,9 @@
 
             <nav class="nav">
                 <a href="index.html" class="nav-link">Home</a>
-                <a href="my-work.html" class="nav-link active">Projects</a>
+                <a href="my-work.html" class="nav-link">Projects</a>
                 <a href="my-thoughts.html" class="nav-link">My Thoughts</a>
-                <a href="about-me.html" class="nav-link">About</a>
+                <a href="about-me.html" class="nav-link active">About</a>
                 <a href="hire-me.html" class="btn btn-secondary btn-sm">Get In Touch</a>
             </nav>
 
@@ -46,28 +46,47 @@
         </button>
         <nav class="mobile-nav">
             <a href="index.html" class="mobile-nav-link">Home</a>
-            <a href="my-work.html" class="mobile-nav-link active">Projects</a>
+            <a href="my-work.html" class="mobile-nav-link">Projects</a>
             <a href="my-thoughts.html" class="mobile-nav-link">My Thoughts</a>
-            <a href="about-me.html" class="mobile-nav-link">About</a>
+            <a href="about-me.html" class="mobile-nav-link active">About</a>
             <a href="hire-me.html" class="btn btn-main">Get In Touch</a>
         </nav>
     </div>
 
     <main>
-        <!-- Page Header -->
-        <div class="page-header container">
-            <h1 class="page-title animate-fade-up">My Work</h1>
-            <p class="page-description animate-fade-up delay-100">
-                A showcase of products I've created and projects I've led as a Product Manager.
-            </p>
-        </div>
+        <section class="about-page container">
+            <div class="page-header">
+                <h1 class="page-title animate-fade-up">About Me</h1>
+                <p class="page-description animate-fade-up delay-100">
+                    Getting to know the person behind the products.
+                </p>
+            </div>
 
-        <!-- Projects Grid -->
-        <section class="work-grid container">
-            <div class="projects-grid" id="products-container">
-                <!-- Products loaded by JavaScript -->
-                <div class="loading">
-                    <div class="spinner"></div>
+            <div class="about-content animate-fade-up delay-200">
+                <div class="about-grid">
+                    <!-- Photo -->
+                    <div class="about-image-wrapper">
+                        <img src="assets/img/simon-portrait.jpg" alt="Simon Tadeu" class="about-image">
+                    </div>
+
+                    <!-- Bio -->
+                    <div class="about-bio">
+                        <h2 class="about-heading">Hi, I'm Simon</h2>
+                        <p class="about-text">
+                            I'm a Senior Product Manager with 8+ years of experience driving product innovation at scale. I specialize in building high-performing teams, delivering impactful products, and advocating for users.
+                        </p>
+                        <p class="about-text">
+                            Based in Lisbon, Portugal, I've worked across wearable tech, e-commerce, AI safety evaluation, MarTech, logistics management, and AML &amp; compliance.
+                        </p>
+                        <p class="about-text">
+                            When I'm not building products, you can find me exploring new ideas, mentoring aspiring product managers, and speaking at events about the craft of product management.
+                        </p>
+
+                        <div class="about-actions">
+                            <a href="hire-me.html" class="btn btn-main">Get In Touch</a>
+                            <a href="assets/files/CV.pdf" target="_blank" class="btn btn-secondary">Download CV</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -93,7 +112,6 @@
     </footer>
 
     <!-- Scripts -->
-    <script src="assets/js/products.js"></script>
     <script>
         // Mobile menu toggle
         function toggleMobileMenu() {
