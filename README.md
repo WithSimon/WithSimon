@@ -27,6 +27,7 @@ This site serves as a central hub to:
 Nav and footer are in **partials/header.html** and **partials/footer.html**. After editing either:
 
 ```bash
+
 node build.js
 ```
 
@@ -151,3 +152,4 @@ Then open `http://localhost:8000/` (home) or `http://localhost:8000/my-work.html
 ## Get In Touch
 
 The **Get In Touch** page (`hire-me.html`) has a Netlify contact form, a link to download the CV (`assets/files/CV.pdf`), and the email hello@withsimon.com.
+```
