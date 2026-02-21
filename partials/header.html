@@ -1,0 +1,37 @@
+    <!-- Header -->
+    <header class="header">
+        <div class="header-inner">
+            <a href="index.html" class="logo">
+                <img src="assets/img/patinho.svg" alt="Simon Tadeu" class="logo-icon">
+                <span class="logo-text">WithSimon</span>
+            </a>
+
+            <nav class="nav">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="my-work.html" class="nav-link">Projects</a>
+                <a href="my-thoughts.html" class="nav-link">My Thoughts</a>
+                <a href="about-me.html" class="nav-link">About</a>
+                <a href="hire-me.html" class="btn btn-secondary btn-sm">Get In Touch</a>
+            </nav>
+
+            <button class="mobile-menu-btn" type="button" aria-expanded="false" aria-controls="mobileMenu" aria-label="Toggle menu" onclick="toggleMobileMenu()">Menu</button>
+        </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu-overlay" id="mobileMenuOverlay" onclick="toggleMobileMenu()"></div>
+    <div class="mobile-menu" id="mobileMenu">
+        <button class="mobile-menu-close" onclick="toggleMobileMenu()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+        </button>
+        <nav class="mobile-nav">
+            <a href="index.html" class="mobile-nav-link">Home</a>
+            <a href="my-work.html" class="mobile-nav-link">Projects</a>
+            <a href="my-thoughts.html" class="mobile-nav-link">My Thoughts</a>
+            <a href="about-me.html" class="mobile-nav-link">About</a>
+            <a href="hire-me.html" class="btn btn-main">Get In Touch</a>
+        </nav>
+    </div>

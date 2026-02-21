@@ -6,11 +6,11 @@ Personal CV/Portfolio website for Simon Tadeu - Senior Product Manager
 
 This is a professional portfolio and CV site showcasing:
 
-- **Professional Profile**: Comprehensive overview of my experience as a Senior Product Manager
-- **Career Journey**: Timeline and milestones throughout my professional career
-- **Projects & Achievements**: Detailed case studies of projects I've led and contributed to
-- **Personal Story**: Who I am beyond the resume
-- **Contact & Opportunities**: Ways to connect for career opportunities and collaborations
+- **Professional Profile**: Overview of my experience as a Senior Product Manager (home page)
+- **Projects**: Case studies in **My Work** — each product has its own detail page built from markdown
+- **About**: Personal background and story (timeline/career journey to come)
+- **My Thoughts**: Articles and reflections (content coming soon)
+- **Get In Touch**: Contact form and links (Netlify form, CV download, email)
 
 ## Purpose
 
@@ -19,6 +19,18 @@ This site serves as a central hub to:
 - Share insights from projects I've been involved in
 - Connect with potential employers, collaborators, and the product community
 - Tell my professional story in a more dynamic and engaging way than a traditional CV
+
+---
+
+## Shared header & footer
+
+Nav and footer are in **partials/header.html** and **partials/footer.html**. After editing either:
+
+```bash
+node build.js
+```
+
+This injects them into all main HTML pages. You can run it before commit/deploy or add it to your deploy step.
 
 ---
 
@@ -47,13 +59,17 @@ tags: [Strategy, UX, Analytics]
 
 # My Awesome Product
 
-Write your full case study here using markdown...
+Write your full case study here. Use **## headings** for the main sections; they are rendered as styled cards on the product page. Common section names (which get matching icons) include **Context**, **Problem**, **Solution**, **Execution**, **Results**, **Takeaways**.
 
-## The Challenge
+## Context
+
+Background and setup.
+
+## Problem
 
 What problem were you solving?
 
-## The Solution
+## Solution
 
 How did you approach it?
 
@@ -66,7 +82,8 @@ What impact did you make?
 
 ```json
 [
-  "sample-product.md",
+  "bond-heart.md",
+  "ecommerce-platform.md",
   "my-awesome-product.md"
 ]
 ```
@@ -87,7 +104,7 @@ The system will automatically:
 - `description`: One-line summary shown on cards
 - `thumbnail`: Path to image (optional, can use external URL)
 - `category`: Category badge (e.g., "Product Management")
-- `date`: Date in YYYY-MM-DD format
+- `date`: Date in YYYY-MM-DD or ISO format (e.g. `2023-03-01` or `2023-03-01T00:00:00.000Z`)
 - `tags`: Array of tags like `[Tag1, Tag2, Tag3]`
 
 ### Markdown Support
@@ -106,13 +123,14 @@ The system will automatically:
 ```
 data/
   products/
-    sample-product.md
+    bond-heart.md
+    ecommerce-platform.md
     my-awesome-product.md
   products-list.json
 assets/
   img/
     products/
-      sample-product.jpg
+      bond-heart.jpeg
       my-awesome-product.jpg
   js/
     products.js
@@ -120,16 +138,16 @@ assets/
 
 ### Local Development
 
-To view products locally, run a web server:
+Products are loaded via `fetch`, so you need a local web server (opening HTML files directly won’t load them):
 
 ```bash
 python -m http.server 8000
 ```
 
-Then visit `http://localhost:8000/my-work.html`
+Then open `http://localhost:8000/` (home) or `http://localhost:8000/my-work.html` (projects).
 
 ---
 
 ## Get In Touch
 
-Interested in working together or learning more about my experience? Visit the site to find contact information and ways to connect.
+The **Get In Touch** page (`hire-me.html`) has a Netlify contact form, a link to download the CV (`assets/files/CV.pdf`), and the email hello@withsimon.com.

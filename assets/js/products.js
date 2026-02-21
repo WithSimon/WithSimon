@@ -1,5 +1,12 @@
 // Product Case Study System - Redesign Refactor
 
+function escapeHtml(str) {
+    if (str == null) return '';
+    const s = String(str);
+    const map = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' };
+    return s.replace(/[&<>"']/g, (c) => map[c]);
+}
+
 class ProductSystem {
     constructor() {
         this.products = [];
@@ -40,25 +47,25 @@ class ProductSystem {
     markdownToHtml(markdown) {
         let html = markdown;
 
-        // Code blocks (must come before other replacements)
-        html = html.replace(/```([\s\S]*?)```/g, '<pre><code>$1</code></pre>');
+        // Code blocks (must come before other replacements) - escape content to prevent XSS
+        html = html.replace(/```([\s\S]*?)```/g, (_, code) => '<pre><code>' + escapeHtml(code) + '</code></pre>');
 
         // Headers
-        html = html.replace(/^### (.*$)/gim, '<h3>$1</h3>');
-        html = html.replace(/^## (.*$)/gim, '<h2>$1</h2>');
-        html = html.replace(/^# (.*$)/gim, '<h1>$1</h1>');
+        html = html.replace(/^### (.*$)/gim, (_, t) => '<h3>' + escapeHtml(t) + '</h3>');
+        html = html.replace(/^## (.*$)/gim, (_, t) => '<h2>' + escapeHtml(t) + '</h2>');
+        html = html.replace(/^# (.*$)/gim, (_, t) => '<h1>' + escapeHtml(t) + '</h1>');
 
         // Bold
-        html = html.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+        html = html.replace(/\*\*(.*?)\*\*/g, (_, t) => '<strong>' + escapeHtml(t) + '</strong>');
 
         // Italic
-        html = html.replace(/\*(.*?)\*/g, '<em>$1</em>');
+        html = html.replace(/\*(.*?)\*/g, (_, t) => '<em>' + escapeHtml(t) + '</em>');
 
-        // Links
-        html = html.replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2">$1</a>');
+        // Links - escape text and URL for attribute safety
+        html = html.replace(/\[(.*?)\]\((.*?)\)/g, (_, text, url) => '<a href="' + escapeHtml(url) + '">' + escapeHtml(text) + '</a>');
 
         // Blockquotes
-        html = html.replace(/^> (.*$)/gim, '<blockquote>$1</blockquote>');
+        html = html.replace(/^> (.*$)/gim, (_, t) => '<blockquote>' + escapeHtml(t) + '</blockquote>');
 
         // Horizontal rules
         html = html.replace(/^---$/gim, '<hr>');
@@ -80,7 +87,7 @@ class ProductSystem {
                     listType = 'ul';
                     inList = true;
                 }
-                processedLines.push(`<li>${unorderedMatch[1]}</li>`);
+                processedLines.push('<li>' + escapeHtml(unorderedMatch[1]) + '</li>');
             } else if (orderedMatch) {
                 if (!inList || listType !== 'ol') {
                     if (inList) processedLines.push(`</${listType}>`);
@@ -88,7 +95,7 @@ class ProductSystem {
                     listType = 'ol';
                     inList = true;
                 }
-                processedLines.push(`<li>${orderedMatch[1]}</li>`);
+                processedLines.push('<li>' + escapeHtml(orderedMatch[1]) + '</li>');
             } else {
                 if (inList) {
                     processedLines.push(`</${listType}>`);
@@ -112,7 +119,7 @@ class ProductSystem {
             if (para.match(/^<(h|ul|ol|blockquote|hr|pre|li)/)) {
                 return para;
             }
-            return `<p>${para}</p>`;
+            return '<p>' + escapeHtml(para) + '</p>';
         }).join('\n');
 
         return html;
@@ -121,32 +128,27 @@ class ProductSystem {
     // Load all products from the products directory
     async loadProducts() {
         try {
-            console.log('Fetching products-list.json...');
             const response = await fetch('data/products-list.json');
-
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
-
             const productFiles = await response.json();
-            console.log('Product files:', productFiles);
-
-            const products = await Promise.all(
+            const results = await Promise.allSettled(
                 productFiles.map(async (filename) => {
-                    console.log('Loading:', filename);
                     const markdown = await this.loadProductFile(filename);
                     const { metadata, content } = this.parseMarkdown(markdown);
-                    console.log('Loaded product:', metadata.title);
-                    return {
-                        filename,
-                        ...metadata,
-                        content
-                    };
+                    return { filename, ...metadata, content };
                 })
             );
-
+            const products = results
+                .filter((r) => r.status === 'fulfilled')
+                .map((r) => r.value);
+            results.forEach((r, i) => {
+                if (r.status === 'rejected') {
+                    console.warn('Product load failed:', productFiles[i], r.reason);
+                }
+            });
             this.products = products.sort((a, b) => new Date(b.date) - new Date(a.date));
-            console.log('Total products loaded:', this.products.length);
             return this.products;
         } catch (error) {
             console.error('Error loading products:', error);
@@ -184,24 +186,28 @@ class ProductSystem {
         return `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>`;
     }
 
-    // Render product card HTML
+    // Render product card HTML (all dynamic content escaped)
     renderProductCard(product) {
-        const tags = Array.isArray(product.tags) ? product.tags : [];
+        const slug = encodeURIComponent(product.slug || '');
+        const title = escapeHtml(product.title || '');
+        const description = escapeHtml(product.description || '');
+        const category = escapeHtml(product.category || 'Product');
+        const thumb = product.thumbnail ? escapeHtml(product.thumbnail) : 'assets/img/placeholder-project.svg';
 
         return `
-            <a href="product.html?slug=${product.slug}" class="project-card">
+            <a href="product.html?slug=${slug}" class="project-card">
                 <div class="project-image-wrapper">
-                    <img src="${product.thumbnail || 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop'}"
-                         alt="${product.title}"
+                    <img src="${thumb}"
+                         alt="${title}"
                          class="project-image">
                     <div class="project-overlay"></div>
-                    <span class="project-category">${product.category || 'Product'}</span>
+                    <span class="project-category">${category}</span>
                     <div class="project-arrow">
                         ${this.getArrowIcon()}
                     </div>
                 </div>
-                <h3 class="project-title">${product.title}</h3>
-                <p class="project-description">${product.description}</p>
+                <h3 class="project-title">${title}</h3>
+                <p class="project-description">${description}</p>
                 <div class="project-date">
                     ${this.getCalendarIcon()} ${this.formatDate(product.date)}
                 </div>
@@ -301,7 +307,7 @@ class ProductSystem {
             if (currentParagraph.length > 0) {
                 const text = currentParagraph.join(' ').trim();
                 if (text) {
-                    html += `<p>${text}</p>`;
+                    html += '<p>' + escapeHtml(text) + '</p>';
                 }
                 currentParagraph = [];
             }
@@ -330,7 +336,7 @@ class ProductSystem {
                 closeBulletList();
                 html += `<div class="project-subsection-header">
                     <span class="bullet-bar color-${color}"></span>
-                    ${trimmedLine}
+                    ${escapeHtml(trimmedLine)}
                 </div>`;
                 return;
             }
@@ -345,7 +351,7 @@ class ProductSystem {
                 const bulletText = trimmedLine.replace(/^[-•]\s*/, '').trim();
                 html += `<li>
                     <span class="bullet color-${color}"></span>
-                    <span>${bulletText}</span>
+                    <span>${escapeHtml(bulletText)}</span>
                 </li>`;
                 return;
             }
@@ -377,8 +383,8 @@ class ProductSystem {
         const tags = Array.isArray(product.tags) ? product.tags : [];
         const sections = this.parseMarkdownSections(product.content);
 
-        // Update page title
-        document.title = `${product.title} | Simon Tadeu`;
+        // Update page title (safe: product is from our data)
+        document.title = (product.title || 'Product') + ' | Simon Tadeu';
 
         // Separate first section (full-width) from the rest (2-column grid)
         const [contextSection, ...otherSections] = sections;
@@ -403,21 +409,21 @@ class ProductSystem {
 
                     <!-- Meta Info -->
                     <div class="project-detail-meta">
-                        <span class="project-detail-badge">${product.category || 'Product'}</span>
+                        <span class="project-detail-badge">${escapeHtml(product.category || 'Product')}</span>
                         <span class="project-detail-date">
                             ${calendarIcon} ${this.formatDate(product.date)}
                         </span>
                     </div>
 
                     <!-- Title -->
-                    <h1 class="project-detail-title">${product.title}</h1>
+                    <h1 class="project-detail-title">${escapeHtml(product.title || '')}</h1>
 
                     <!-- Description -->
-                    <p class="project-detail-description">${product.description}</p>
+                    <p class="project-detail-description">${escapeHtml(product.description || '')}</p>
 
                     <!-- Tags -->
                     <div class="project-detail-tags">
-                        ${tags.map(tag => `<span class="project-detail-tag">${tagIcon} ${tag}</span>`).join('')}
+                        ${tags.map(tag => `<span class="project-detail-tag">${tagIcon} ${escapeHtml(tag)}</span>`).join('')}
                     </div>
                 </div>
             </section>
@@ -427,7 +433,7 @@ class ProductSystem {
             <section class="project-detail-image">
                 <div class="container">
                     <div class="project-detail-image-wrapper">
-                        <img src="${product.thumbnail}" alt="${product.title}">
+                        <img src="${escapeHtml(product.thumbnail)}" alt="${escapeHtml(product.title || '')}">
                         <div class="project-detail-image-overlay"></div>
                     </div>
                 </div>
@@ -443,7 +449,7 @@ class ProductSystem {
                     <div class="project-section-card full-width" style="border: 1px solid hsl(270, 70%, 65%, 0.4);">
                         <div class="project-section-header color-${contextSection.color}">
                             <div class="project-section-icon">${contextSection.icon}</div>
-                            <h2 class="project-section-title">${contextSection.title}</h2>
+                            <h2 class="project-section-title">${escapeHtml(contextSection.title)}</h2>
                         </div>
                         <div class="project-section-content">
                             ${this.renderStyledContent(contextSection.content, contextSection.color)}
@@ -469,7 +475,7 @@ class ProductSystem {
                             <div class="project-section-card" style="border: 1px solid ${borderColor};">
                                 <div class="project-section-header color-${section.color}">
                                     <div class="project-section-icon">${section.icon}</div>
-                                    <h2 class="project-section-title">${section.title}</h2>
+                                    <h2 class="project-section-title">${escapeHtml(section.title)}</h2>
                                 </div>
                                 <div class="project-section-content">
                                     ${this.renderStyledContent(section.content, section.color)}
@@ -529,27 +535,21 @@ const productSystem = new ProductSystem();
 
 // Auto-load on page ready
 document.addEventListener('DOMContentLoaded', async () => {
-    console.log('DOM loaded, initializing...');
-
     await productSystem.loadProducts();
 
     const path = window.location.pathname;
     const params = new URLSearchParams(window.location.search);
-
-    console.log('Current path:', path);
-    console.log('Products loaded:', productSystem.products.length);
+    const baseSegment = path.split('/').filter(Boolean).pop() || '';
+    const isHome = path === '/' || path.endsWith('/') || baseSegment === '' || baseSegment === 'index.html' || baseSegment.startsWith('index');
 
     if (path.includes('my-work')) {
-        console.log('Rendering products cards...');
         productSystem.renderProductCards('products-container');
     } else if (path.includes('product')) {
         const slug = params.get('slug');
         if (slug) {
-            console.log('Rendering product detail for:', slug);
             await productSystem.renderProduct(slug, 'product-detail');
         }
-    } else if (path === '/' || path.includes('index') || path.endsWith('/')) {
-        console.log('Rendering featured products on home page...');
+    } else if (isHome) {
         productSystem.renderFeaturedProducts('featured-products-container');
     }
 });

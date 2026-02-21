@@ -1,3 +1,5 @@
+# macOS
+.DS_Store
 
 # Nimbalyst local plans (not checked into version control)
 nimbalyst-local/

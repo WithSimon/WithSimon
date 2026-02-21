@@ -50,6 +50,9 @@
   --font-display: 'Fira Sans', system-ui, sans-serif;
   --font-mono: 'Fira Code', monospace;
 
+  /* Solid dark for overscroll/rubber-band (iOS often ignores gradient in bounce zone) */
+  --bg-solid: #0c0a0f;
+
   /* Gradients - tequila sunrise with purple */
   --gradient-bg: linear-gradient(180deg, hsl(30, 20%, 6%) 0%, hsl(350, 30%, 12%) 30%, hsl(280, 35%, 15%) 60%, hsl(260, 40%, 10%) 100%);
   --gradient-accent: linear-gradient(135deg, hsl(40, 90%, 55%) 0%, hsl(20, 85%, 60%) 50%, hsl(280, 70%, 60%) 100%);
@@ -72,16 +75,24 @@
 
 html {
   scroll-behavior: smooth;
+  /* Solid dark so overscroll/rubber-band on iOS shows dark instead of white (gradient often not painted there) */
+  background: var(--bg-solid);
+  min-height: 100%;
+  /* Fixed layer so the dark fills the viewport during bounce */
+  background-attachment: fixed;
 }
 
 body {
   font-family: var(--font-display);
-  background: var(--gradient-bg);
+  background: var(--bg-solid);
+  background-image: var(--gradient-bg);
+  background-attachment: fixed;
   color: var(--foreground);
   min-height: 100vh;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overscroll-behavior-y: none;
 }
 
 /* ============================================
