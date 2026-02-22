@@ -250,8 +250,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .mobile-menu-btn svg {
-  width: 1.25rem;
-  height: 1.25rem;
+  width: 1.5rem;
+  height: 1.5rem;
   color: var(--secondary-foreground);
   transition: transform 0.3s ease;
 }
@@ -325,6 +325,11 @@ h1, h2, h3, h4, h5, h6 {
 .btn-lg {
   padding: 1rem 2rem;
   font-size: 1rem;
+}
+
+.btn-text,
+.mobile-nav-cta .mobile-nav-cta-text {
+  transform: translateY(1px);
 }
 
 /* ============================================
@@ -1764,11 +1769,11 @@ h1, h2, h3, h4, h5, h6 {
    ============================================ */
 
 .animate-fade-up {
-  animation: fadeUp 0.6s ease-out forwards;
+  animation: fadeUp 0.6s ease-out both;
 }
 
 .animate-fade-in {
-  animation: fadeIn 0.5s ease-out forwards;
+  animation: fadeIn 0.5s ease-out both;
 }
 
 @keyframes fadeUp {
@@ -1902,8 +1907,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .mobile-menu-close svg {
-  width: 1.25rem;
-  height: 1.25rem;
+  width: 1.5rem;
+  height: 1.5rem;
   color: var(--secondary-foreground);
 }
 
@@ -2009,8 +2014,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .mobile-nav-link-icon svg {
-  width: 1.25rem;
-  height: 1.25rem;
+  width: 1.5rem;
+  height: 1.5rem;
 }
 
 /* Link text */
@@ -2072,9 +2077,13 @@ h1, h2, h3, h4, h5, h6 {
   scale: 0.98;
 }
 
+.mobile-nav-cta-icon {
+  display: flex;
+}
+
 .mobile-nav-cta-icon svg {
-  width: 1.125rem;
-  height: 1.125rem;
+  width: 1.5rem;
+  height: 1.5rem;
 }
 
 .mobile-nav-cta-arrow {

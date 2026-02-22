@@ -18,8 +18,8 @@
 <body><!-- Header -->
     <header class="header">
         <div class="header-inner">
-            <a href="index.html" class="logo">
-                <img src="assets/img/patinho.svg" alt="Simon Tadeu" class="logo-icon">
+            <a href="index.html" class="logo" id="logoLink">
+                <img src="assets/img/patinho.svg" alt="Simon Tadeu" class="logo-icon" id="logoDuck">
                 <span class="logo-text">WithSimon</span>
             </a>
 
@@ -28,7 +28,7 @@
                 <a href="my-work.html" class="nav-link">Projects</a>
                 <a href="my-thoughts.html" class="nav-link">My Thoughts</a>
                 <a href="about-me.html" class="nav-link">About</a>
-                <a href="hire-me.html" class="btn btn-secondary btn-sm">Get In Touch</a>
+                <a href="hire-me.html" class="btn btn-secondary btn-sm"><span class="btn-text">Get In Touch</span></a>
             </nav>
 
             <button class="mobile-menu-btn" type="button" aria-expanded="false" aria-controls="mobileMenu" aria-label="Toggle menu" onclick="toggleMobileMenu()">
@@ -84,7 +84,7 @@
                 <span class="mobile-nav-cta-icon">
                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
                 </span>
-                <span>Get In Touch</span>
+                <span class="mobile-nav-cta-text">Get In Touch</span>
                 <span class="mobile-nav-cta-arrow">
                     <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3.33 8H12.67M12.67 8L8 3.33M12.67 8L8 12.67" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
                 </span>
@@ -101,6 +101,32 @@
 
 
 
+
+    <!-- Duck Quack Easter Egg -->
+    <script>
+    (function() {
+        var duck = document.getElementById('logoDuck');
+        if (!duck) return;
+
+        var quackSound = new Audio('assets/sound/quack.mp3');
+
+        function quack() {
+            quackSound.currentTime = 0;
+            quackSound.play();
+        }
+
+        duck.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            quack();
+            duck.style.transition = 'transform 0.1s';
+            duck.style.transform = 'rotate(-15deg)';
+            setTimeout(function() { duck.style.transform = 'rotate(10deg)'; }, 100);
+            setTimeout(function() { duck.style.transform = 'rotate(-5deg)'; }, 200);
+            setTimeout(function() { duck.style.transform = 'rotate(0deg)'; }, 300);
+        });
+    })();
+    </script>
 
     <main>
         <section class="contact-page container">
@@ -142,7 +168,7 @@
                         </div>
 
                         <button type="submit" class="btn btn-main btn-lg" style="width: 100%;">
-                            Send Message
+                            <span class="btn-text">Send Message</span>
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
                         </button>
                     </form>
