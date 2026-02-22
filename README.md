@@ -27,7 +27,6 @@ This site serves as a central hub to:
 Nav and footer are in **partials/header.html** and **partials/footer.html**. After editing either:
 
 ```bash
-
 node build.js
 ```
 
@@ -43,7 +42,7 @@ Just add markdown files to the `data/products/` folder.
 
 ### Adding a New Product
 
-**1. Create a markdown file in `data/products/`**
+**1. Create a markdown file in \****`data/products/`**
 
 Example: `data/products/my-awesome-product.md`
 
@@ -79,7 +78,7 @@ How did you approach it?
 What impact did you make?
 ```
 
-**2. Add the filename to `data/products-list.json`**
+**2. Add the filename to \****`data/products-list.json`**
 
 ```json
 [
@@ -152,4 +151,11 @@ Then open `http://localhost:8000/` (home) or `http://localhost:8000/my-work.html
 ## Get In Touch
 
 The **Get In Touch** page (`hire-me.html`) has a Netlify contact form, a link to download the CV (`assets/files/CV.pdf`), and the email hello@withsimon.com.
-```
+
+---
+
+## Post-MVP Scope
+
+- **Design revamp**: Rework the visual identity for something more unique and distinctive
+- **Carousel images on project pages**: Add image carousels to product detail pages for richer case studies
+- **My Thoughts articles**: Build out the articles/blog section with actual content
